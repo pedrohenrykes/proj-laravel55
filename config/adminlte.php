@@ -108,17 +108,28 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        // 'MAIN NAVIGATION',
         [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'icon' => 'money',
+            'text' => 'Dashboard',
+            'url'  => 'admin',
+            'icon' => 'dashboard',
             // 'can'  => 'manage-blog',
         ],
         [
-            'text' => 'Pages',
-            'url'  => 'admin/pages',
-            'icon' => 'file',
+            'text' => 'Financeiro',
+            'icon' => 'money',
+            'submenu' => [
+                [
+                    'text' => 'Saldo',
+                    'url'  => 'admin/balance',
+                    'icon' => 'credit-card-alt',
+                ],
+                [
+                    'text' => 'Histórico',
+                    'url'  => 'admin/historic',
+                    'icon' => 'history',
+                ],
+            ],
         ],
     ],
 

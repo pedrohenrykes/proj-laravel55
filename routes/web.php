@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get('/', 'Site\SiteController@index')->name('home');
 
-Route::group(['middleware' => ['auth'], 'namespace' => 'Admin'], function() {
-    Route::get('/admin', 'AdminController@index')->name('admin.home');
+Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
+    Route::get('/', 'AdminController@index')->name('admin.home');
+    Route::get('/balance', 'BalanceController@index')->name('admin.balance');
 });
