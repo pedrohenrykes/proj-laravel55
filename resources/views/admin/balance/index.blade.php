@@ -14,16 +14,16 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-            <a href="" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Recarregar</a>
+        <a href="{{ route('balance.deposit') }}" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Recarregar</a>
             <a href="" class="btn btn-danger"><i class="fa fa-sign-out" aria-hidden="true"></i> Sacar</a>
         </div>
         <div class="box-body">
             <div class="row">
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3>R$ 150</h3>
+                            <h3>R$ {{ number_format($amount, 2, ',', '') }}</h3>
                             <p>Saldo em conta</p>
                         </div>
                         <div class="icon">
