@@ -14,10 +14,19 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-        <a href="{{ route('balance.deposit') }}" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Recarregar</a>
-            <a href="" class="btn btn-danger"><i class="fa fa-sign-out" aria-hidden="true"></i> Sacar</a>
+            <a href="{{ route('balance.deposit') }}" class="btn btn-primary">
+                <i class="fa fa-sign-in" aria-hidden="true"></i> Depósitar
+            </a>
+            @if ($amount > 0)
+                <a href="{{ route('balance.withdraw') }}" class="btn btn-danger">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i> Sacar
+                </a>
+            @endif
         </div>
         <div class="box-body">
+
+            @include('admin.includes.alerts')
+            
             <div class="row">
                 <div class="col-lg-4 col-xs-6">
                     <!-- small box -->
