@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Balance;
 use App\Http\Requests\MoneyValidationFormRequest;
+use App\User;
 
 class BalanceController extends Controller
 {
@@ -65,6 +66,67 @@ class BalanceController extends Controller
         return (
             redirect()
             ->back()
+            ->with('error', $response['message'])
+        );
+    }
+
+    public function transfer()
+    {
+        return view('admin.balance.transfer');
+    }
+
+    public function receiverConfirm(Request $request, User $user)
+    {
+        $receiver = $user->searchReceiver($request->receiver_user);
+        
+        if (!$receiver) {
+            return (
+                redirect()
+                ->back()
+                ->with('error', 'O favorecido não foi encontrado! Por favor, informe novamente')
+            );
+        }
+
+        if ($receiver->id === auth()->user()->id) {
+            return (
+                redirect()
+                ->back()
+                ->with('error', 'Ops! Não é possível realizar uma transferência para você mesmo.')
+            );
+        }
+
+        $balance = auth()->user()->balance;
+
+        return view('admin.balance.transfer-validate', compact('receiver', 'balance'));
+    }
+
+    public function transferStore(MoneyValidationFormRequest $request, User $user)
+    {
+        $receiver = $user->find($request->receiver_id);
+
+        if (!$receiver) {
+            return (
+                redirect()
+                ->route('balance.transfer')
+                ->with('error', 'Favorecido não identificado, por favor, tente novamente.')
+            );
+        }
+
+        $balance = auth()->user()->balance()->firstOrCreate([]);
+        
+        $response = $balance->transfer($request->new_value, $receiver);
+
+        if ($response['success']) {
+            return (
+                redirect()
+                ->route('admin.balance')
+                ->with('success', $response['message'])
+            );
+        }
+
+        return (
+            redirect()
+            ->route('balance.transfer')
             ->with('error', $response['message'])
         );
     }

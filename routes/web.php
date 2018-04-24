@@ -22,4 +22,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::post('/balance/deposit', 'BalanceController@depositStore')->name('deposit.store');
     Route::get('/balance/withdraw', 'BalanceController@withdraw')->name('balance.withdraw');
     Route::post('/balance/withdraw', 'BalanceController@withdrawStore')->name('withdraw.store');
+    Route::get('/balance/transfer', 'BalanceController@transfer')->name('balance.transfer');
+    Route::post('/balance/receiver-confirm', 'BalanceController@receiverConfirm')->name('transfer.receiver-confirm');    
+    Route::post('/balance/transfer', 'BalanceController@transferStore')->name('transfer.store');    
 });

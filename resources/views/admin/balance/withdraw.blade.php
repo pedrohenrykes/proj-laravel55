@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Nova Recarga')
+@section('title', 'Nova saque')
 
 @section('content_header')
     <h1>Realizar saque</h1>

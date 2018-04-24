@@ -40,4 +40,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Historic::class);
     }
+
+    public function searchReceiver(String $receiver)
+    {
+        return $this->where('name', 'LIKE', "%{$receiver}%")
+            ->orWhere('email', $receiver)->get()->first();
+    }
 }

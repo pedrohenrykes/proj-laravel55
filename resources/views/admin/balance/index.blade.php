@@ -21,6 +21,9 @@
                 <a href="{{ route('balance.withdraw') }}" class="btn btn-danger">
                     <i class="fa fa-sign-out" aria-hidden="true"></i> Sacar
                 </a>
+                <a href="{{ route('balance.transfer') }}" class="btn btn-warning">
+                    <i class="fa fa-exchange" aria-hidden="true"></i> Transferir
+                </a>
             @endif
         </div>
         <div class="box-body">
