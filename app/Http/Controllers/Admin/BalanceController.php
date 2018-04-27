@@ -7,11 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Balance;
 use App\Http\Requests\MoneyValidationFormRequest;
 use App\User;
+use App\Models\Historic;
 
 class BalanceController extends Controller
 {
+    private $rowsPerPage = 5;
+
     public function index()
     {
+        // neste caso, balance nao e um atributo de user, mas uma funcao
         $balance = auth()->user()->balance;
         $amount = $balance ? $balance->amount : 0;
 
@@ -94,7 +98,7 @@ class BalanceController extends Controller
                 ->with('error', 'Ops! Não é possível realizar uma transferência para você mesmo.')
             );
         }
-
+        
         $balance = auth()->user()->balance;
 
         return view('admin.balance.transfer-validate', compact('receiver', 'balance'));
@@ -129,5 +133,20 @@ class BalanceController extends Controller
             ->route('balance.transfer')
             ->with('error', $response['message'])
         );
+    }
+
+    public function historic(Historic $historic)
+    {
+        // neste caso, historics e uma funcao de user, mas pode ser chamado como atributo
+        $historics = auth()->user()->historics()->with(['userSender'])->paginate($this->rowsPerPage);
+
+        $types = $historic->type();
+
+        return view('admin.balance.historic', compact('historics', 'types'));
+    }
+
+    public function searchHistoric(Request $request)
+    {
+        dd($request->all());
     }
 }
