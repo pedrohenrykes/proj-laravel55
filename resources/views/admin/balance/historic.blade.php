@@ -58,7 +58,11 @@
                     @endforelse
                 </tbody>
             </table>
-            {!! $historics->links() !!}
+            @if(isset($formData))
+                {!! $historics->appends($formData)->links() !!}
+            @else
+                {!! $historics->links() !!}
+            @endif
         </div>
     </div>
 @stop

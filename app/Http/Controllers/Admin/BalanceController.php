@@ -11,7 +11,7 @@ use App\Models\Historic;
 
 class BalanceController extends Controller
 {
-    private $rowsPerPage = 5;
+    private $rowsPerPage = 2;
 
     public function index()
     {
@@ -145,8 +145,14 @@ class BalanceController extends Controller
         return view('admin.balance.historic', compact('historics', 'types'));
     }
 
-    public function searchHistoric(Request $request)
+    public function searchHistoric(Request $request, Historic $historic)
     {
-        dd($request->all());
+        $formData = $request->except(['_token']);
+
+        $historics = $historic->search($formData, $this->rowsPerPage);
+
+        $types = $historic->type();
+
+        return view('admin.balance.historic', compact('historics', 'types', 'formData'));
     }
 }
