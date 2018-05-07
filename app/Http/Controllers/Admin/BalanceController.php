@@ -81,6 +81,14 @@ class BalanceController extends Controller
 
     public function receiverConfirm(Request $request, User $user)
     {
+        if (empty($request->receiver_user)) {
+            return (
+                redirect()
+                ->back()
+                ->with('error', 'Por favor, informe o e-mail do favorecido')
+            );
+        }
+
         $receiver = $user->searchReceiver($request->receiver_user);
         
         if (!$receiver) {
