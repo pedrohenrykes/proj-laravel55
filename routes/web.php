@@ -13,7 +13,8 @@
 
 Auth::routes();
 
-Route::get('/', 'Site\SiteController@index')->name('home');
+Route::get('/', 'Auth\LoginController@index')->name('login');
+
 Route::get('/my-profile', 'Admin\UserController@profile')->name('profile')->middleware('auth');
 Route::post('/my-profile/update', 'Admin\UserController@profileUpdate')->name('profile.update')->middleware('auth');
 

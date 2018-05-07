@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'System32',
+    'title' => 'Template',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>System</b>32',
+    'logo' => '<b>Template</b>',
 
-    'logo_mini' => '<b>S</b>32',
+    'logo_mini' => '<b>Template</b>',
 
     /*
     |--------------------------------------------------------------------------
